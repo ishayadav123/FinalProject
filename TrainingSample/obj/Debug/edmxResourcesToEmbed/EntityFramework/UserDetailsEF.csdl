@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="UserDetailsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="CarDetail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" />
+    <Property Name="CarLicense" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="UserDetail" Relationship="Self.FK_CarDetails_UserId_PK_UserDetails_UserId" FromRole="CarDetails" ToRole="UserDetails" />
+  </EntityType>
+  <EntityType Name="UserDetail">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FullName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UserEmail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CivilIdNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DOB" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="MobileNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="RoleId" Type="Int32" />
+    <Property Name="ProfilePic" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="IsNotificationActive" Type="Boolean" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="DeviceId" Type="Int32" />
+    <Property Name="DeviceType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="FcmToken" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="verify" Type="Boolean" />
+    <Property Name="VerifiedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Area" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Block" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Street" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Housing" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Floor" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="NewPass" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ConPass" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Jadda" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Reason" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ActivatedBy" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="VerifiedDate" Type="DateTime" Precision="0" />
+    <Property Name="ActivatedDate" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="CarDetails" Relationship="Self.FK_CarDetails_UserId_PK_UserDetails_UserId" FromRole="UserDetails" ToRole="CarDetails" />
+  </EntityType>
+  <Association Name="FK_CarDetails_UserId_PK_UserDetails_UserId">
+    <End Role="UserDetails" Type="Self.UserDetail" Multiplicity="0..1" />
+    <End Role="CarDetails" Type="Self.CarDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserDetails">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="CarDetails">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="TraineeEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="CarDetails" EntityType="Self.CarDetail" />
+    <EntitySet Name="UserDetails" EntityType="Self.UserDetail" />
+    <AssociationSet Name="FK_CarDetails_UserId_PK_UserDetails_UserId" Association="Self.FK_CarDetails_UserId_PK_UserDetails_UserId">
+      <End Role="UserDetails" EntitySet="UserDetails" />
+      <End Role="CarDetails" EntitySet="CarDetails" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

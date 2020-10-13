@@ -1,0 +1,186 @@
+﻿
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/DataTables/css/dataTables.bootstrap4.css" rel="stylesheet" />
+
+
+
+</head>
+<body>
+    <div class="container py-4">
+        <h3 class="text-center text-uppercase">TRAFFIC-TRAINEES</h3><br />
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addUser">
+            Add User
+        </button>
+        <hr />
+        <div id="dataTable_wrapper"></div>
+        <table id="dataTable" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>UserId</th>
+                    <th>FullName</th>
+                    <th>UserEmail</th>
+                    <th>CivilIdNumber</th>
+                    <th>CarLicense</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+
+        </table>
+
+    </div>
+    <div class="modal fade" id="addUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Add/Edit User Details</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form id="AddProduct" method="post" enctype="multipart/form-data">
+                                <div class="form-group">
+
+                                    <label>Name</label>
+                                    <input class="form-control" id="AName" name="AName" type="text" />
+                                    <span id="nameval" class="field-validation-error"></span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Email</label>
+                                    <input class="form-control" id="ALat" name="ALat" type="text" />
+                                    <span id="latval" class="field-validation-error"></span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Address</label>
+                                    <input class="form-control" id="ALong" name="ALong" type="text" />
+                                    <span id="longval" class="field-validation-error"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label>ProfilePic</label>
+
+                                    <div class="div-file">
+                                        <input id="inputFile" type="file" name="ImageFile" accept="image/*" onchange="encodeImagetoBase64(this)" />
+                                    </div>
+                                    <div>
+                                        <p style="display:none" id="pImageBase64"></p>
+                                    </div>
+                                    <div>
+                                        <img id="image" height="150">
+                                    </div>
+                                    <span id="longval" class="field-validation-error"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label>CarLicense</label>
+                                    <input class="form-control" id="cLicense" name="CarLicense" type="text" />
+                                    <span id="longval" class="field-validation-error"></span>
+                                </div>
+                                <input type="hidden" id="action" name="action" />
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" onclick="return InsertUser();">Submit</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="editUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Add/Edit User Details</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form id="editProduct" method="post" enctype="multipart/form-data">
+                                <div class="form-group">
+
+                                    <label>Id</label>
+                                    <input class="form-control" id="gid1" name="gid1" type="text" />
+                                    <span id="gidval" class="field-validation-error"></span>
+                                </div>
+                                <div class="form-group">
+
+                                    <label>Name</label>
+                                    <input class="form-control" id="AName1" name="AName1" type="text" />
+                                    <span id="nameval" class="field-validation-error"></span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Email</label>
+                                    <input class="form-control" id="ALat1" name="ALat1" type="text" />
+                                    <span id="latval" class="field-validation-error"></span>
+                                </div>
+
+                                @*<div class="form-group">
+                                        <label>Address</label>
+                                        <input class="form-control" id="ALong1" name="ALong1" type="text" />
+                                        <span id="longval" class="field-validation-error"></span>
+                                    </div>*@
+
+                                <div class="form-group" id="carDetailsDiv">
+                                    @*<label>CarLicense</label>
+                                        <input class="form-control" id="cLicense1" name="cLicense1" type="text" />
+                                            <span id="longval" class="field-validation-error"></span>*@
+                                </div>
+                                <input type="hidden" id="action" name="action" />
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" onclick="return EditUser1();">Submit</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+<script src="~/Scripts/UsersScripts/delete.js"></script>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>
+<script src="~/Scripts/DataTables/dataTables.bootstrap4.min.js"></script>
+<script src="~/Scripts/UsersScripts/Add.js"></script>
+<script src="~/Scripts/UsersScripts/Adduser.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        debugger;
+        $('#dataTable').DataTable({
+            "ajax": {
+                url: '/Index/GetData',
+                "type": "GET",
+                "datatype": "json"
+            },
+            "columns": [
+                { "data": "UserId" },
+                { "data": "FullName" },
+                { "data": "UserEmail" },
+                { "data": "CivilIdNumber" },
+                { "data": "CarLicense" },
+                { 'data': null, title: 'Action', wrap: true, "render": function (data) { return '<div class="btn-group"> <button type="button" onclick="EditUserDetails(' + data.UserId + ')" value="0" class="btn btn-info" data-toggle="modal" data-target="#editUser">Edit</button></div>' } },
+                { 'data': null, title: 'Action', wrap: true, "render": function (data) { return '<div class="btn-group"> <button type="button" onclick="DeleteUser(' + data.UserId + ')" value="0" class="btn btn-info" >Delete</button></div>' } }
+
+            ]
+        });
+    });
+
+
+</script>

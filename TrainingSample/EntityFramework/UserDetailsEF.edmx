@@ -1,0 +1,224 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="UserDetailsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CarDetails">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="CarLicense" Type="nvarchar(max)" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="ModifiedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="UserDetails">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FullName" Type="nvarchar(max)" />
+          <Property Name="UserEmail" Type="nvarchar(max)" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="CivilIdNumber" Type="nvarchar(max)" />
+          <Property Name="DOB" Type="varchar" MaxLength="100" />
+          <Property Name="MobileNo" Type="varchar" MaxLength="50" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="RoleId" Type="int" />
+          <Property Name="ProfilePic" Type="nvarchar(max)" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="IsNotificationActive" Type="bit" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="DeviceId" Type="int" />
+          <Property Name="DeviceType" Type="nvarchar(max)" />
+          <Property Name="FcmToken" Type="nvarchar(max)" />
+          <Property Name="verify" Type="bit" />
+          <Property Name="VerifiedBy" Type="nvarchar(max)" />
+          <Property Name="Area" Type="nvarchar(max)" />
+          <Property Name="Block" Type="nvarchar(max)" />
+          <Property Name="Street" Type="nvarchar(max)" />
+          <Property Name="Housing" Type="nvarchar(max)" />
+          <Property Name="Floor" Type="nvarchar(max)" />
+          <Property Name="NewPass" Type="nvarchar(max)" />
+          <Property Name="ConPass" Type="nvarchar(max)" />
+          <Property Name="Jadda" Type="nvarchar(max)" />
+          <Property Name="Reason" Type="nvarchar(max)" />
+          <Property Name="ActivatedBy" Type="varchar" MaxLength="30" />
+          <Property Name="VerifiedDate" Type="date" />
+          <Property Name="ActivatedDate" Type="date" />
+        </EntityType>
+        <Association Name="FK_CarDetails_UserId_PK_UserDetails_UserId">
+          <End Role="UserDetails" Type="Self.UserDetails" Multiplicity="0..1" />
+          <End Role="CarDetails" Type="Self.CarDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserDetails">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="CarDetails">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="UserDetailsModelStoreContainer">
+          <EntitySet Name="CarDetails" EntityType="Self.CarDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserDetails" EntityType="Self.UserDetails" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CarDetails_UserId_PK_UserDetails_UserId" Association="Self.FK_CarDetails_UserId_PK_UserDetails_UserId">
+            <End Role="UserDetails" EntitySet="UserDetails" />
+            <End Role="CarDetails" EntitySet="CarDetails" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="UserDetailsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CarDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="CarLicense" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="UserDetail" Relationship="Self.FK_CarDetails_UserId_PK_UserDetails_UserId" FromRole="CarDetails" ToRole="UserDetails" />
+        </EntityType>
+        <EntityType Name="UserDetail">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FullName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UserEmail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CivilIdNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DOB" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="MobileNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RoleId" Type="Int32" />
+          <Property Name="ProfilePic" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsNotificationActive" Type="Boolean" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="DeviceId" Type="Int32" />
+          <Property Name="DeviceType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FcmToken" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="verify" Type="Boolean" />
+          <Property Name="VerifiedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Area" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Block" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Street" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Housing" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Floor" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NewPass" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ConPass" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Jadda" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Reason" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ActivatedBy" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="VerifiedDate" Type="DateTime" Precision="0" />
+          <Property Name="ActivatedDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="CarDetails" Relationship="Self.FK_CarDetails_UserId_PK_UserDetails_UserId" FromRole="UserDetails" ToRole="CarDetails" />
+        </EntityType>
+        <Association Name="FK_CarDetails_UserId_PK_UserDetails_UserId">
+          <End Role="UserDetails" Type="Self.UserDetail" Multiplicity="0..1" />
+          <End Role="CarDetails" Type="Self.CarDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserDetails">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="CarDetails">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TraineeEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CarDetails" EntityType="Self.CarDetail" />
+          <EntitySet Name="UserDetails" EntityType="Self.UserDetail" />
+          <AssociationSet Name="FK_CarDetails_UserId_PK_UserDetails_UserId" Association="Self.FK_CarDetails_UserId_PK_UserDetails_UserId">
+            <End Role="UserDetails" EntitySet="UserDetails" />
+            <End Role="CarDetails" EntitySet="CarDetails" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="UserDetailsModelStoreContainer" CdmEntityContainer="TraineeEntities">
+          <EntitySetMapping Name="CarDetails">
+            <EntityTypeMapping TypeName="UserDetailsModel.CarDetail">
+              <MappingFragment StoreEntitySet="CarDetails">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CarLicense" ColumnName="CarLicense" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserDetails">
+            <EntityTypeMapping TypeName="UserDetailsModel.UserDetail">
+              <MappingFragment StoreEntitySet="UserDetails">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="CivilIdNumber" ColumnName="CivilIdNumber" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="ProfilePic" ColumnName="ProfilePic" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="IsNotificationActive" ColumnName="IsNotificationActive" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="DeviceId" ColumnName="DeviceId" />
+                <ScalarProperty Name="DeviceType" ColumnName="DeviceType" />
+                <ScalarProperty Name="FcmToken" ColumnName="FcmToken" />
+                <ScalarProperty Name="verify" ColumnName="verify" />
+                <ScalarProperty Name="VerifiedBy" ColumnName="VerifiedBy" />
+                <ScalarProperty Name="Area" ColumnName="Area" />
+                <ScalarProperty Name="Block" ColumnName="Block" />
+                <ScalarProperty Name="Street" ColumnName="Street" />
+                <ScalarProperty Name="Housing" ColumnName="Housing" />
+                <ScalarProperty Name="Floor" ColumnName="Floor" />
+                <ScalarProperty Name="NewPass" ColumnName="NewPass" />
+                <ScalarProperty Name="ConPass" ColumnName="ConPass" />
+                <ScalarProperty Name="Jadda" ColumnName="Jadda" />
+                <ScalarProperty Name="Reason" ColumnName="Reason" />
+                <ScalarProperty Name="ActivatedBy" ColumnName="ActivatedBy" />
+                <ScalarProperty Name="VerifiedDate" ColumnName="VerifiedDate" />
+                <ScalarProperty Name="ActivatedDate" ColumnName="ActivatedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

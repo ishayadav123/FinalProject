@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="UserDetailsModelStoreContainer" CdmEntityContainer="TraineeEntities">
+    <EntitySetMapping Name="CarDetails">
+      <EntityTypeMapping TypeName="UserDetailsModel.CarDetail">
+        <MappingFragment StoreEntitySet="CarDetails">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="CarLicense" ColumnName="CarLicense" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserDetails">
+      <EntityTypeMapping TypeName="UserDetailsModel.UserDetail">
+        <MappingFragment StoreEntitySet="UserDetails">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
+          <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+          <ScalarProperty Name="CivilIdNumber" ColumnName="CivilIdNumber" />
+          <ScalarProperty Name="DOB" ColumnName="DOB" />
+          <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="ProfilePic" ColumnName="ProfilePic" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="IsNotificationActive" ColumnName="IsNotificationActive" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="DeviceId" ColumnName="DeviceId" />
+          <ScalarProperty Name="DeviceType" ColumnName="DeviceType" />
+          <ScalarProperty Name="FcmToken" ColumnName="FcmToken" />
+          <ScalarProperty Name="verify" ColumnName="verify" />
+          <ScalarProperty Name="VerifiedBy" ColumnName="VerifiedBy" />
+          <ScalarProperty Name="Area" ColumnName="Area" />
+          <ScalarProperty Name="Block" ColumnName="Block" />
+          <ScalarProperty Name="Street" ColumnName="Street" />
+          <ScalarProperty Name="Housing" ColumnName="Housing" />
+          <ScalarProperty Name="Floor" ColumnName="Floor" />
+          <ScalarProperty Name="NewPass" ColumnName="NewPass" />
+          <ScalarProperty Name="ConPass" ColumnName="ConPass" />
+          <ScalarProperty Name="Jadda" ColumnName="Jadda" />
+          <ScalarProperty Name="Reason" ColumnName="Reason" />
+          <ScalarProperty Name="ActivatedBy" ColumnName="ActivatedBy" />
+          <ScalarProperty Name="VerifiedDate" ColumnName="VerifiedDate" />
+          <ScalarProperty Name="ActivatedDate" ColumnName="ActivatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
